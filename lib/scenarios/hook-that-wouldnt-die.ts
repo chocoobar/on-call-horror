@@ -6,6 +6,7 @@ export const hookThatWouldntDie: Scenario = {
   subtitle: "reports-api has been \"Progressing\" for way too long",
   difficulty: "medium",
   type: "fix",
+  topic: "argocd",
   timeMinutes: 20,
   tags: ["argocd", "hooks", "sync"],
   briefing: `The "reports-api" Application has been stuck in "Progressing" for an

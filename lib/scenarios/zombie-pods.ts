@@ -6,6 +6,7 @@ export const zombiePods: Scenario = {
   subtitle: "queue-worker keeps dying and coming back",
   difficulty: "easy",
   type: "fix",
+  topic: "kubernetes",
   timeMinutes: 15,
   tags: ["argocd", "gitops", "deployment"],
   briefing: `The "queue-worker" background job Application synced cleanly according to

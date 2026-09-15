@@ -6,6 +6,7 @@ export const stuckAt3am: Scenario = {
   subtitle: "ArgoCD Application won't sync",
   difficulty: "easy",
   type: "fix",
+  topic: "argocd",
   timeMinutes: 15,
   tags: ["argocd", "sync", "gitops"],
   briefing: `PagerDuty just paged you. The on-call handoff notes say the "stuck-at-3am"

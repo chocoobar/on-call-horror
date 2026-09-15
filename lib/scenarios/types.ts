@@ -49,6 +49,8 @@ export interface Scenario {
   subtitle: string;
   difficulty: Difficulty;
   type: ScenarioType;
+  /** Matches a `Topic["id"]` from `lib/topics.ts`; drives the side nav grouping. */
+  topic: string;
   timeMinutes: number;
   tags: string[];
   /** Story-style incident description, shown before/while investigating. */

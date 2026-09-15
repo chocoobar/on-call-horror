@@ -17,6 +17,7 @@ export const driftInTheDark: Scenario = {
   subtitle: "someone kubectl-edited prod and ArgoCD noticed",
   difficulty: "medium",
   type: "do",
+  topic: "argocd",
   timeMinutes: 20,
   tags: ["argocd", "drift", "self-heal"],
   briefing: `A teammate "just this once" ran a live kubectl change against the "api"
