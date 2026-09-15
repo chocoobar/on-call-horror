@@ -21,6 +21,15 @@ const BLOCKED_ARGOCD_VERBS = new Set([
   "sync", "terminate-op", "set", "patch", "delete", "rollback", "resource",
 ]);
 
+/** Only real Kubernetes API fields belong in -o yaml/-o json - strip the mock engine's own bookkeeping. */
+function toApiObject(o: K8sObject): Record<string, unknown> {
+  const { apiVersion, kind, metadata, spec, status } = o;
+  const clean: Record<string, unknown> = { apiVersion, kind, metadata };
+  if (spec) clean.spec = spec;
+  if (status) clean.status = status;
+  return clean;
+}
+
 function findByKindNameNs(world: ScenarioWorld, kind: string, name: string, namespace?: string): K8sObject | undefined {
   return world.resources.find(
     (r) => r.kind === kind && r.metadata.name === name && (!namespace || (r.metadata.namespace ?? "default") === namespace)
@@ -48,11 +57,12 @@ function kubectlGet(args: string[], world: ScenarioWorld): CommandOutput {
   }
 
   if (parsed.output === "yaml") {
-    const chunks = matches.map((m) => toYamlLines(m));
+    const chunks = matches.map((m) => toYamlLines(toApiObject(m)));
     return ok(chunks.flatMap((c, i) => (i < chunks.length - 1 ? [...c, "---"] : c)));
   }
   if (parsed.output === "json") {
-    return ok([JSON.stringify(matches.length === 1 ? matches[0] : { items: matches }, null, 2)]);
+    const clean = matches.map(toApiObject);
+    return ok([JSON.stringify(matches.length === 1 ? clean[0] : { items: clean }, null, 2)]);
   }
 
   return ok(renderTable(kind, matches, { showNamespace: parsed.allNamespaces }));

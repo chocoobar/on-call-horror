@@ -90,7 +90,7 @@ for this app clearly didn't test it locally first.`,
       id: "bad-command",
       label: "The container's command exits immediately with a failure every time it starts, so Kubernetes keeps restarting it.",
       explanation:
-        "Correct. The logs (\"fatal: cannot bind to queue\") show the process itself exiting on startup - that's exactly what CrashLoopBackOff with a climbing restart count and 0/1 Ready means. This needs a fix to the container's command/config in the GitOps source.",
+        "The logs (\"fatal: cannot bind to queue\") show the process itself exiting on startup - that's exactly what CrashLoopBackOff with a climbing restart count and 0/1 Ready means. This needs a fix to the container's command/config in the GitOps source.",
     },
     {
       id: "zero-replicas",

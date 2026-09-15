@@ -83,7 +83,7 @@ deployed to the "shop" namespace yet.`,
       id: "wrong-ref-path",
       label: "The Application's targetRevision and path point to a branch and directory that don't exist (master/manifest instead of main/manifests).",
       explanation:
-        "Correct. The condition message spells it out: ArgoCD tried to resolve the branch \"master\", which doesn't exist - the repo's default branch is \"main\". Even fixing the branch alone wouldn't be enough, since the path \"manifest\" (singular) also doesn't match the real \"manifests\" directory. Both spec.source.targetRevision and spec.source.path need correcting.",
+        "The condition message spells it out: ArgoCD tried to resolve the branch \"master\", which doesn't exist - the repo's default branch is \"main\". Even fixing the branch alone wouldn't be enough, since the path \"manifest\" (singular) also doesn't match the real \"manifests\" directory. Both spec.source.targetRevision and spec.source.path need correcting.",
     },
     {
       id: "repo-server-down",

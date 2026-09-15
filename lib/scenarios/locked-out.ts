@@ -87,7 +87,7 @@ AppProject did.`,
       id: "destinations-mismatch",
       label: "The AppProject's destinations allowlist doesn't include the 'billing' namespace the Application actually deploys to.",
       explanation:
-        "Correct. The AppProject only allowlists `billing-legacy`, but the Application's `spec.destination.namespace` is `billing` - exactly what the InvalidSpecError condition names. The security hardening pass allowlisted the wrong namespace.",
+        "The AppProject only allowlists `billing-legacy`, but the Application's `spec.destination.namespace` is `billing` - exactly what the InvalidSpecError condition names. The security hardening pass allowlisted the wrong namespace.",
     },
     {
       id: "wrong-project",

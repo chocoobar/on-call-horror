@@ -100,7 +100,7 @@ checking that.`,
       id: "port-mismatch",
       label: "The nginx config (via ConfigMap) listens on port 8080, but the Service sends traffic to port 80, and nothing checks for the mismatch.",
       explanation:
-        "Correct. `nginx-conf` sets `listen 8080;`, but the Service's `targetPort` is 80 - nginx isn't listening where the Service expects. With no readiness/liveness probe defined, Kubernetes has no way to detect this: the container process started fine, so the pod shows Ready, and ArgoCD's health check (which just reads Kubernetes' own status) reports Healthy too.",
+        "`nginx-conf` sets `listen 8080;`, but the Service's `targetPort` is 80 - nginx isn't listening where the Service expects. With no readiness/liveness probe defined, Kubernetes has no way to detect this: the container process started fine, so the pod shows Ready, and ArgoCD's health check (which just reads Kubernetes' own status) reports Healthy too.",
     },
     {
       id: "network-policy",

@@ -77,7 +77,7 @@ Now the Application fails to apply at all.`,
       id: "bad-helm-param",
       label: "A Helm parameter override on the Application sets replicaCount to a non-numeric value, which Kubernetes rejects.",
       explanation:
-        "Correct. `spec.source.helm.parameters` overrides `replicaCount` to the string \"many\". Rendered through the chart, that becomes `replicas: many` in the Deployment - the Kubernetes API rejects it because replicas must be an integer, exactly matching the error message.",
+        "`spec.source.helm.parameters` overrides `replicaCount` to the string \"many\". Rendered through the chart, that becomes `replicas: many` in the Deployment - the Kubernetes API rejects it because replicas must be an integer, exactly matching the error message.",
     },
     {
       id: "bad-image-repo",

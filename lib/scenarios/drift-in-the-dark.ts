@@ -88,7 +88,7 @@ silently reverted before anyone notices it.`,
       id: "manual-scale-no-selfheal",
       label: "Someone manually scaled the Deployment with kubectl, and selfHeal is disabled so ArgoCD won't auto-revert the drift.",
       explanation:
-        "Correct. `argocd app diff` shows live replicas (5) don't match git's declared value (2), the Deployment's own Events show a ScalingReplicaSet event with no corresponding sync operation, and the Application's syncPolicy has selfHeal: false - so ArgoCD flags the drift (OutOfSync) but won't correct it automatically.",
+        "`argocd app diff` shows live replicas (5) don't match git's declared value (2), the Deployment's own Events show a ScalingReplicaSet event with no corresponding sync operation, and the Application's syncPolicy has selfHeal: false - so ArgoCD flags the drift (OutOfSync) but won't correct it automatically.",
     },
     {
       id: "automated-disabled",

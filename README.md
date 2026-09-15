@@ -1,129 +1,74 @@
 # On-Call Horror
 
-Real ArgoCD/Kubernetes on-call incidents you can practice fixing - locally,
-for free, with no account and no hosted infrastructure.
+A deductive investigation game for ArgoCD/Kubernetes on-call incidents - played
+entirely in your browser, with no real cluster, no Docker, and no backend.
 
-Each scenario spins up a real disposable [`kind`](https://kind.sigs.k8s.io/)
-cluster with [ArgoCD](https://argo-cd.readthedocs.io/) installed, deliberately
-broken the way a real on-call page would be, deployed via a real local
-GitOps repo (not a simulation). You fix it with your own `kubectl`/`argocd`,
-then a `check.sh` script verifies your fix against the live cluster.
+Each scenario gives you a mocked `kubectl`/`argocd` console pre-loaded with a
+broken (but realistic-looking) cluster state. You investigate with read-only
+commands (`get`, `describe`, `logs`, `argocd app get`/`diff`), gather clues,
+then submit a diagnosis - like a detective game, but for on-call incidents.
 
 Inspired by [sadservers.com](https://sadservers.com), but scoped to
-ArgoCD/Kubernetes on-call work and run entirely on your own machine instead
-of hosted servers.
+ArgoCD/Kubernetes GitOps incidents and built as a static client-side app
+instead of provisioning real infrastructure.
 
-## Prerequisites
-
-- [Docker](https://www.docker.com/) (Desktop or Engine), running
-- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
-- [git](https://git-scm.com/)
-- [argocd CLI](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
-- Python 3.10+
-
-Verify everything is in place:
+## Run it locally
 
 ```bash
-oncallhorror doctor
+npm install
+npm run dev
 ```
 
-## Install
+Open <http://localhost:3000>.
+
+## Build
 
 ```bash
-pip install -e cli/
+npm run build
 ```
 
-## Quickstart
-
-```bash
-oncallhorror list                      # browse scenarios
-oncallhorror info stuck-at-3am         # read the full incident description
-oncallhorror start stuck-at-3am        # spin up the cluster, pre-broken
-#  ... go fix it with kubectl/argocd ...
-oncallhorror check stuck-at-3am        # verify your fix
-oncallhorror hint stuck-at-3am         # stuck? progressive hints
-oncallhorror solution stuck-at-3am     # full walkthrough (spoilers)
-oncallhorror stop stuck-at-3am         # tear down this scenario's cluster
-oncallhorror clean                     # tear down everything
-```
+Configured as a static export (`output: "export"` in `next.config.mjs`) -
+the build produces a fully static `out/` directory with no server required,
+deployable to GitHub Pages, Netlify, or any static host.
 
 ## How it works
 
-- `oncallhorror start <id>` builds (once) and starts a shared local
-  `oncallhorror-gitd` container that serves each scenario's GitOps source
-  over `git://` on the `kind` docker network, creates a fresh `kind`
-  cluster, installs ArgoCD, and applies the scenario's `Application` (and
-  any `AppProject`) manifests - which then sync from that local git repo,
-  the same way ArgoCD would sync from GitHub/GitLab in production.
-- Where a scenario's fix belongs in the GitOps source (not just live
-  cluster state), the CLI prints the local path to that repo's working
-  copy - edit files there directly and `git commit`; no push needed, since
-  it's already what ArgoCD is pulling from.
-- `oncallhorror check <id>` runs that scenario's `check.sh` against your
-  current kube context and reports pass/fail.
-- Nothing is hosted: no accounts, no servers, no cost. Only real ArgoCD/
-  Kubernetes behavior, running on your machine.
-
-## Scenarios
-
-Run `oncallhorror list` for the full, current list with difficulty/type/time.
-Browse them with descriptions at [`docs/index.html`](docs/index.html) (or the
-published GitHub Pages site, once you deploy it).
+- `lib/scenarios/*.ts` - one file per scenario: briefing, constraints, a mock
+  cluster state (`world.resources`, a list of `K8sObject`s shaped like real
+  Kubernetes/ArgoCD API objects), progressive hints, and a multiple-choice
+  diagnosis (one correct option, three plausible wrong ones, each with an
+  explanation).
+- `lib/terminal/` - a small mock `kubectl`/`argocd` interpreter: parses the
+  typed command, looks resources up in the current scenario's `world`, and
+  renders realistic `get` tables, `describe` output, and `logs`. Mutating
+  verbs (`apply`, `edit`, `patch`, `scale`, `argocd app sync`, etc.) are
+  recognized and explicitly blocked with an in-character message - this is a
+  read-only forensics console, not a live cluster.
+- `components/Terminal.tsx` - the terminal UI (command history, arrow-key
+  recall) that calls into `lib/terminal/run.ts`.
+- `components/DiagnosisPanel.tsx` - the multiple-choice submission UI; grades
+  instantly against `scenario.correctOptionId` and shows the full resolution
+  on a correct answer.
+- `lib/progress.ts` - solved-scenario tracking in `localStorage` (per-browser,
+  nothing sent anywhere).
 
 ## Adding a new scenario
 
-Create `scenarios/NNN-your-slug/` with:
+Add a new file in `lib/scenarios/` following the `Scenario` type in
+`lib/scenarios/types.ts`, then register it in `lib/scenarios/index.ts`. Use
+an existing scenario (e.g. `stuck-at-3am.ts`) as a template:
 
-- `scenario.yaml` - metadata: `id`, `title`, `subtitle`, `difficulty`
-  (`easy`/`medium`/`hard`), `type` (`fix`/`do`/`hack`), `time_minutes`,
-  `tags`, `description`, `constraints`, `test_description`.
-- `app-repo/` - the GitOps source ArgoCD syncs from. Any `*.yaml` file
-  directly under `app-repo/` (e.g. `application.yaml`, `00-project.yaml`)
-  is applied to the cluster as a bootstrap resource by `oncallhorror
-  start`; everything under `app-repo/manifests/` (or wherever the
-  Application's `spec.source.path` points) is what actually gets seeded
-  into the served git repo and synced by ArgoCD. Point
-  `spec.source.repoURL` at `git://oncallhorror-gitd/<id>.git`.
-- `break.sh` (optional) - extra tampering that can't be expressed as
-  GitOps source, e.g. simulating a manual `kubectl` change. Reads
-  `$KUBE_CONTEXT` from its environment.
-- `check.sh` - pass/fail validation. `source ../_lib/check_helpers.sh` for
-  `assert_app_synced_healthy`, `assert_pods_running`, `pass`, `fail`, and
-  the pre-built `$KC` kubectl-with-context array.
-- `hints.md` - `## `-delimited sections, revealed progressively by
-  `oncallhorror hint --level N`.
-- `solution.md` - full walkthrough.
-
-Use an existing scenario (e.g. `scenarios/001-stuck-at-3am/`) as a template.
-
-## Static catalog site
-
-```bash
-cd site
-pip install -r requirements.txt
-python generate_site.py
-```
-
-Renders `docs/index.html` plus one detail page per scenario. Publish it for
-free with GitHub Pages: repo Settings -> Pages -> Deploy from branch ->
-`/docs`.
-
-## Troubleshooting
-
-- **A scenario's pods can't reach the git-daemon container by name**: this
-  relies on Docker's embedded DNS resolving container names for other
-  containers on the same user-defined bridge network (`kind`), forwarded
-  through the kind node's resolver. This works with Docker Desktop's
-  default networking; if you're on an unusual Docker/CNI setup and it
-  doesn't resolve, check `kubectl -n argocd logs deploy/argocd-repo-server`
-  for the underlying DNS/connection error.
-- **`oncallhorror doctor` reports `argocd` missing**: install the
-  [argocd CLI](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
-  - several scenarios use `argocd app sync`/`terminate-op` in their hints
-    and solutions.
-- **Leftover clusters/containers**: `kind get clusters` and `docker ps` to
-  see what's still running; `oncallhorror clean` tears everything down.
+- `world.resources` - the mock objects that exist when the scenario starts.
+  Only `apiVersion`/`kind`/`metadata`/`spec`/`status` are ever shown to the
+  player (via `-o yaml`/`-o json`/`describe`); `age`, `events`, `logs`, and
+  `previousLogs` are mock-engine bookkeeping used by the table/describe/logs
+  renderers.
+- `options` - exactly one entry's `id` should match `correctOptionId`; write
+  a real explanation for every option (shown after submission, right or
+  wrong).
+- `hints` - revealed one at a time, most subtle first.
+- `resolution` - shown after a correct diagnosis; supports Markdown (used
+  for inline `code` and fenced code blocks).
 
 ## License
 

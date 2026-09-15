@@ -84,7 +84,7 @@ of the sync to proceed.`,
       id: "hook-hangs",
       label: "A PreSync hook Job never completes, so ArgoCD never proceeds to sync the main Deployment.",
       explanation:
-        "Correct. The Job's `status.active` is 1 and `succeeded` is 0 - it's been running the entire 22 minutes the app has existed, and its logs show the migration starting but never finishing. Because it's annotated as a PreSync hook, ArgoCD holds the rest of the sync (the Deployment) until this Job reports success.",
+        "The Job's `status.active` is 1 and `succeeded` is 0 - it's been running the entire 22 minutes the app has existed, and its logs show the migration starting but never finishing. Because it's annotated as a PreSync hook, ArgoCD holds the rest of the sync (the Deployment) until this Job reports success.",
     },
     {
       id: "sync-timeout-low",

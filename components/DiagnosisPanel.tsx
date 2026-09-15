@@ -69,7 +69,8 @@ export function DiagnosisPanel({ scenario }: { scenario: Scenario }) {
       ) : (
         <div className="mt-4 space-y-3">
           <div className={`rounded-md border px-3 py-2.5 text-sm ${isCorrect ? "border-easy text-easy" : "border-accent text-accent"}`}>
-            {isCorrect ? "Correct." : "Not quite."} {submittedOption?.explanation}
+            <span className="font-semibold">{isCorrect ? "✓ Correct" : "✗ Not quite"}</span>
+            <span className="block mt-1 text-neutral-200">{submittedOption?.explanation}</span>
           </div>
 
           {!isCorrect && (
