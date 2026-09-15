@@ -17,12 +17,16 @@ export default function TopicPage({ params }: { params: { topic: string } }) {
 
   return (
     <main className="mx-auto max-w-6xl px-4 pb-16 pt-8">
-      <Link href="/" className="text-dim text-sm hover:text-accent transition-colors">
-        &larr; All scenarios
-      </Link>
+      <nav className="flex items-center gap-1.5 text-sm text-dim" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-neutral-200 transition-colors">
+          Scenarios
+        </Link>
+        <span>/</span>
+        <span className="text-neutral-200">{topic.label}</span>
+      </nav>
 
       <header className="mt-3 mb-10">
-        <h1 className="text-3xl font-bold tracking-tight">{topic.label}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-neutral-100">{topic.label}</h1>
         <p className="text-dim mt-2">{topic.description}</p>
       </header>
 

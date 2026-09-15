@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { scenarios, getScenario } from "@/lib/scenarios";
+import { getTopic } from "@/lib/topics";
 import { DifficultyBadge, TypeBadge, Tag } from "@/components/Badges";
 import { Prose } from "@/components/Prose";
 import { Terminal } from "@/components/Terminal";
@@ -14,12 +15,25 @@ export function generateStaticParams() {
 export default function ScenarioPage({ params }: { params: { id: string } }) {
   const scenario = getScenario(params.id);
   if (!scenario) notFound();
+  const topic = getTopic(scenario.topic);
 
   return (
     <main className="mx-auto max-w-5xl px-4 pb-16 pt-8">
-      <Link href="/" className="text-dim text-sm hover:text-accent transition-colors">
-        &larr; All scenarios
-      </Link>
+      <nav className="flex items-center gap-1.5 text-sm text-dim" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-neutral-200 transition-colors">
+          Scenarios
+        </Link>
+        {topic && (
+          <>
+            <span>/</span>
+            <Link href={`/topic/${topic.id}/`} className="hover:text-neutral-200 transition-colors">
+              {topic.label}
+            </Link>
+          </>
+        )}
+        <span>/</span>
+        <span className="text-neutral-200 truncate">{scenario.title}</span>
+      </nav>
 
       <header className="mt-3 mb-6">
         <h1 className="text-3xl font-bold">&ldquo;{scenario.title}&rdquo;</h1>

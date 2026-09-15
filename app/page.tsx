@@ -14,18 +14,17 @@ export default function CatalogPage() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-10">
-      <header className="text-center mb-10">
-        <h1 className="text-4xl font-bold tracking-tight" style={{ textShadow: "0 0 18px #7a1f1f" }}>
-          On-Call Horror
-        </h1>
-        <p className="text-dim mt-2">
-          Real ArgoCD &amp; Kubernetes incidents. Investigate a mocked cluster in your browser, deduce the root
-          cause, no infra required.
+    <main className="mx-auto max-w-6xl px-4 pb-16 pt-8">
+      <header className="mb-10">
+        <h1 className="text-2xl font-semibold tracking-tight text-neutral-100">Scenarios</h1>
+        <p className="text-dim mt-2 max-w-2xl">
+          Real ArgoCD, Kubernetes, and Spring Boot incidents. Investigate a mocked cluster in your browser, deduce
+          the root cause, no infra required.
         </p>
-        <p className="text-dim text-sm mt-3">
+        <div className="mt-3 inline-flex items-center gap-2 text-sm text-dim">
+          <span className="h-1.5 w-1.5 rounded-full bg-easy" />
           {total} / {scenarios.length} solved
-        </p>
+        </div>
       </header>
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">

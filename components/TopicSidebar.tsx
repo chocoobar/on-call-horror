@@ -9,8 +9,10 @@ function NavLink({ href, active, children }: { href: string; active: boolean; ch
   return (
     <Link
       href={href}
-      className={`block rounded px-3 py-2 text-sm transition-colors ${
-        active ? "bg-panel text-accent font-semibold" : "text-dim hover:bg-panel hover:text-neutral-200"
+      className={`block rounded-md border-l-2 py-2 pl-3 pr-2.5 text-sm transition-colors ${
+        active
+          ? "border-accent bg-panel text-neutral-100 font-medium"
+          : "border-transparent text-dim hover:border-border hover:bg-panel/50 hover:text-neutral-200"
       }`}
     >
       {children}
@@ -22,9 +24,9 @@ export function TopicSidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="lg:w-56 shrink-0" aria-label="Topics">
-      <h2 className="text-xs uppercase tracking-wide text-dim mb-2 px-3">Topics</h2>
-      <ul className="space-y-1">
+    <nav className="w-full lg:w-56 shrink-0" aria-label="Topics">
+      <h2 className="mb-2 px-3 text-xs font-medium uppercase tracking-wide text-dim">Topics</h2>
+      <ul className="space-y-0.5">
         <li>
           <NavLink href="/" active={pathname === "/"}>
             All scenarios
@@ -38,7 +40,7 @@ export function TopicSidebar() {
               <NavLink href={href} active={pathname === href || pathname === `/topic/${topic.id}`}>
                 <span className="flex items-center justify-between">
                   <span>{topic.label}</span>
-                  <span className="text-dim text-xs">{count}</span>
+                  <span className="text-dim text-xs tabular-nums">{count}</span>
                 </span>
               </NavLink>
             </li>
