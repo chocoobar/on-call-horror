@@ -6,6 +6,9 @@ import { lockedOut } from "./locked-out";
 import { helmGoneWrong } from "./helm-gone-wrong";
 import { hookThatWouldntDie } from "./hook-that-wouldnt-die";
 import { silentFailure } from "./silent-failure";
+import { sigtermNeverArrived } from "./sigterm-never-arrived";
+import { virtualThreadsRealProblems } from "./virtual-threads-real-problems";
+import { heapThatWasntTheProblem } from "./heap-that-wasnt-the-problem";
 
 export * from "./types";
 
@@ -19,6 +22,9 @@ export const scenarios: Scenario[] = [
   helmGoneWrong,
   hookThatWouldntDie,
   silentFailure,
+  sigtermNeverArrived,
+  virtualThreadsRealProblems,
+  heapThatWasntTheProblem,
 ].sort((a, b) => (DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty]) || a.id.localeCompare(b.id));
 
 export function getScenario(id: string): Scenario | undefined {

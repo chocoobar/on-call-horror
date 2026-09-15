@@ -21,6 +21,11 @@ export const TOPICS: Topic[] = [
     label: "Argo CD",
     description: "Sync, drift, RBAC, and Helm incidents in an ArgoCD-managed cluster.",
   },
+  {
+    id: "spring-boot",
+    label: "Spring Boot",
+    description: "JVM-in-a-container incidents on Java 25 - signal handling, virtual threads, and memory limits.",
+  },
 ];
 
 export function getTopic(id: string): Topic | undefined {
