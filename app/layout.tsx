@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://narenviswanath.com/on-call-horror/"),
   title: "On-Call Horror",
   description: "Deductive ArgoCD/Kubernetes on-call incident scenarios, played entirely in your browser.",
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
