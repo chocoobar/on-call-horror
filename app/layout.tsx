@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://narenviswanath.com/on-call-horror/"),
+  // Origin only - Next's `basePath` config already prefixes "/on-call-horror"
+  // onto relative metadata URLs (icon, opengraph-image, etc.); including it
+  // here too would double it up.
+  metadataBase: new URL("https://narenviswanath.com"),
   title: "On-Call Horror",
   description: "Deductive ArgoCD/Kubernetes on-call incident scenarios, played entirely in your browser.",
   twitter: {
