@@ -107,6 +107,16 @@ const KIND_ALIASES: Record<string, string> = {
   projects: "AppProject",
   job: "Job",
   jobs: "Job",
+  ing: "Ingress",
+  ingress: "Ingress",
+  ingresses: "Ingress",
+  netpol: "NetworkPolicy",
+  networkpolicy: "NetworkPolicy",
+  networkpolicies: "NetworkPolicy",
+  servicemonitor: "ServiceMonitor",
+  servicemonitors: "ServiceMonitor",
+  prometheusrule: "PrometheusRule",
+  prometheusrules: "PrometheusRule",
 };
 
 export function normalizeKind(raw: string): string {

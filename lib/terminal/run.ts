@@ -183,7 +183,8 @@ const HELP_TEXT = [
   "  clear",
   "  help",
   "",
-  "Kinds: pod, deployment, service, configmap, application, appproject, job",
+  "Kinds: pod, deployment, service, configmap, application, appproject, job,",
+  "       ingress, networkpolicy, servicemonitor, prometheusrule",
   "'k' works as a shorthand for 'kubectl'.",
 ];
 

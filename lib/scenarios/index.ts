@@ -9,6 +9,16 @@ import { silentFailure } from "./silent-failure";
 import { sigtermNeverArrived } from "./sigterm-never-arrived";
 import { virtualThreadsRealProblems } from "./virtual-threads-real-problems";
 import { heapThatWasntTheProblem } from "./heap-that-wasnt-the-problem";
+import { noDataKnowProblem } from "./no-data-know-problem";
+import { alertThatNeverFired } from "./alert-that-never-fired";
+import { tooManySeries } from "./too-many-series";
+import { whereDidTheLogsGo } from "./where-did-the-logs-go";
+import { blockedAtTheBorder } from "./blocked-at-the-border";
+import { theIngressThatWasnt } from "./the-ingress-that-wasnt";
+import { theFiveSecondDelay } from "./the-five-second-delay";
+import { theSandboxThatWasnt } from "./the-sandbox-that-wasnt";
+import { eightToTwentyFive } from "./eight-to-twenty-five";
+import { theCacheThatForgot } from "./the-cache-that-forgot";
 
 export * from "./types";
 
@@ -25,6 +35,16 @@ export const scenarios: Scenario[] = [
   sigtermNeverArrived,
   virtualThreadsRealProblems,
   heapThatWasntTheProblem,
+  noDataKnowProblem,
+  alertThatNeverFired,
+  tooManySeries,
+  whereDidTheLogsGo,
+  blockedAtTheBorder,
+  theIngressThatWasnt,
+  theFiveSecondDelay,
+  theSandboxThatWasnt,
+  eightToTwentyFive,
+  theCacheThatForgot,
 ].sort((a, b) => (DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty]) || a.id.localeCompare(b.id));
 
 export function getScenario(id: string): Scenario | undefined {

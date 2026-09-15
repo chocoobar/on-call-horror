@@ -26,6 +26,21 @@ export const TOPICS: Topic[] = [
     label: "Spring Boot",
     description: "JVM-in-a-container incidents on Java 25 - signal handling, virtual threads, and memory limits.",
   },
+  {
+    id: "observability",
+    label: "Observability",
+    description: "Prometheus, Grafana, and the ELK stack lying to you in new and exciting ways.",
+  },
+  {
+    id: "networking",
+    label: "Networking",
+    description: "NetworkPolicies, Ingress routing, and DNS - the layer everything else silently depends on.",
+  },
+  {
+    id: "java-bugs",
+    label: "Java Bugs",
+    description: "Language and runtime bugs - broken equals()/hashCode() contracts, and upgrades that break in production.",
+  },
 ];
 
 export function getTopic(id: string): Topic | undefined {
