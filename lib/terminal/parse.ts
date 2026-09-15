@@ -117,6 +117,23 @@ const KIND_ALIASES: Record<string, string> = {
   servicemonitors: "ServiceMonitor",
   prometheusrule: "PrometheusRule",
   prometheusrules: "PrometheusRule",
+  sts: "StatefulSet",
+  statefulset: "StatefulSet",
+  statefulsets: "StatefulSet",
+  pvc: "PersistentVolumeClaim",
+  persistentvolumeclaim: "PersistentVolumeClaim",
+  persistentvolumeclaims: "PersistentVolumeClaim",
+  quota: "ResourceQuota",
+  resourcequota: "ResourceQuota",
+  resourcequotas: "ResourceQuota",
+  pdb: "PodDisruptionBudget",
+  poddisruptionbudget: "PodDisruptionBudget",
+  poddisruptionbudgets: "PodDisruptionBudget",
+  hpa: "HorizontalPodAutoscaler",
+  horizontalpodautoscaler: "HorizontalPodAutoscaler",
+  horizontalpodautoscalers: "HorizontalPodAutoscaler",
+  certificate: "Certificate",
+  certificates: "Certificate",
 };
 
 export function normalizeKind(raw: string): string {

@@ -184,7 +184,9 @@ const HELP_TEXT = [
   "  help",
   "",
   "Kinds: pod, deployment, service, configmap, application, appproject, job,",
-  "       ingress, networkpolicy, servicemonitor, prometheusrule",
+  "       ingress, networkpolicy, servicemonitor, prometheusrule, statefulset,",
+  "       persistentvolumeclaim, resourcequota, poddisruptionbudget,",
+  "       horizontalpodautoscaler",
   "'k' works as a shorthand for 'kubectl'.",
 ];
 
