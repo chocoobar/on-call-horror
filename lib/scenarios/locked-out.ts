@@ -6,6 +6,7 @@ export const lockedOut: Scenario = {
   subtitle: "the billing app is denied by its own AppProject",
   difficulty: "medium",
   type: "fix",
+  topic: "argocd",
   timeMinutes: 20,
   tags: ["argocd", "rbac", "appproject"],
   briefing: `Platform security ran a "namespace allowlist hardening" pass on all

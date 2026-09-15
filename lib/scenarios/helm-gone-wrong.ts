@@ -6,6 +6,7 @@ export const helmGoneWrong: Scenario = {
   subtitle: "storefront's chart won't apply",
   difficulty: "medium",
   type: "fix",
+  topic: "argocd",
   timeMinutes: 15,
   tags: ["argocd", "helm"],
   briefing: `The "storefront" Application deploys a small Helm chart. It was fine until

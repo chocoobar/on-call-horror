@@ -52,12 +52,21 @@ deployable to GitHub Pages, Netlify, or any static host.
 - `lib/progress.ts` - solved-scenario tracking in `localStorage` (per-browser,
   nothing sent anywhere).
 
+Scenarios are grouped into topics (Kubernetes, Argo CD, ...) shown as a side
+nav on the catalog page. `lib/topics.ts` defines the topic list, and each
+scenario's `topic` field (in `lib/scenarios/types.ts`) picks which one it
+belongs to; `app/topic/[topic]/page.tsx` renders each topic's scenarios as
+its own static page.
+
 ## Adding a new scenario
 
 Add a new file in `lib/scenarios/` following the `Scenario` type in
 `lib/scenarios/types.ts`, then register it in `lib/scenarios/index.ts`. Use
 an existing scenario (e.g. `stuck-at-3am.ts`) as a template:
 
+- `topic` - which side nav section it belongs to (an id from
+  `lib/topics.ts`). To add a whole new topic, add an entry to `TOPICS` in
+  `lib/topics.ts` first.
 - `world.resources` - the mock objects that exist when the scenario starts.
   Only `apiVersion`/`kind`/`metadata`/`spec`/`status` are ever shown to the
   player (via `-o yaml`/`-o json`/`describe`); `age`, `events`, `logs`, and

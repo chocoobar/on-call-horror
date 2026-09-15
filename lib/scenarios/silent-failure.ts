@@ -6,6 +6,7 @@ export const silentFailure: Scenario = {
   subtitle: "everything is green, and yet",
   difficulty: "hard",
   type: "fix",
+  topic: "kubernetes",
   timeMinutes: 30,
   tags: ["argocd", "networking", "health-checks"],
   briefing: `Customer support has three tickets about the "silent-failure" web app
