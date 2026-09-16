@@ -127,13 +127,41 @@ function kubectlDescribe(args: string[], world: ScenarioWorld): CommandOutput {
   return ok(matches.flatMap((m, i) => [...describeObject(m), ...(i < matches.length - 1 ? ["", "-".repeat(60), ""] : [])]));
 }
 
+/** `kubectl logs deploy/name` (also sts/, rs/, ds/, job/) - resolves to that controller's own pods, like the real CLI. */
+function resolveControllerPods(world: ScenarioWorld, ref: string, namespace?: string): K8sObject[] | undefined {
+  const slashIdx = ref.indexOf("/");
+  if (slashIdx === -1) return undefined;
+  const kind = normalizeKind(ref.slice(0, slashIdx));
+  const name = ref.slice(slashIdx + 1);
+  const controller = findByKindNameNs(world, kind, name, namespace);
+  if (!controller) return [];
+  // some scenarios (e.g. a Job) carry their own logs directly rather than via a separate Pod object
+  if (controller.logs || controller.previousLogs) return [controller];
+  const selector = (controller.spec?.selector as { matchLabels?: Record<string, string> } | undefined)?.matchLabels
+    ?? controller.metadata.labels;
+  const byLabels = selector
+    ? world.resources.filter((r) => r.kind === "Pod" && Object.entries(selector).every(([k, v]) => r.metadata.labels?.[k] === v))
+    : [];
+  if (byLabels.length > 0) return byLabels;
+  // fall back to the real-world naming convention: pod names are prefixed with their controller's name
+  return world.resources.filter(
+    (r) => r.kind === "Pod" && r.metadata.name.startsWith(`${controller.metadata.name}-`) &&
+      (r.metadata.namespace ?? "default") === (controller.metadata.namespace ?? "default")
+  );
+}
+
 function kubectlLogs(args: string[], world: ScenarioWorld): CommandOutput {
   const parsed = parseArgs(args);
   let pods = world.resources.filter((r) => r.kind === "Pod");
 
   const [nameArg] = parsed.positional;
-  if (parsed.namespace) pods = pods.filter((r) => (r.metadata.namespace ?? "default") === parsed.namespace);
-  if (nameArg) pods = pods.filter((r) => r.metadata.name === nameArg);
+  const controllerPods = nameArg ? resolveControllerPods(world, nameArg, parsed.namespace) : undefined;
+  if (controllerPods !== undefined) {
+    pods = controllerPods;
+  } else {
+    if (parsed.namespace) pods = pods.filter((r) => (r.metadata.namespace ?? "default") === parsed.namespace);
+    if (nameArg) pods = pods.filter((r) => r.metadata.name === nameArg);
+  }
   if (parsed.selector) pods = pods.filter((r) => matchesSelector(r.metadata.labels, parsed.selector));
 
   if (pods.length === 0) {
