@@ -44,6 +44,25 @@ every few minutes, each one apparently reacting to the other's changes.`,
         age: "2d",
       },
       {
+        apiVersion: "argoproj.io/v1alpha1",
+        kind: "Application",
+        metadata: {
+          name: "metrics-addon",
+          namespace: "argocd",
+          annotations: {
+            "argocd.argoproj.io/tracking-id": "platform-addons:argoproj.io/Application:argocd/metrics-addon",
+          },
+        },
+        spec: {
+          project: "default",
+          source: { repoURL: "https://github.com/example/metrics-addon.git", targetRevision: "main", path: "manifests" },
+          destination: { server: "https://kubernetes.default.svc", namespace: "metrics" },
+          syncPolicy: { automated: { prune: true, selfHeal: true } },
+        },
+        status: { sync: { status: "Synced", revision: "ee55ff6" }, health: { status: "Healthy" } },
+        age: "2d",
+      },
+      {
         apiVersion: "v1",
         kind: "ConfigMap",
         metadata: { name: "app-of-apps-split-notes", namespace: "argocd" },

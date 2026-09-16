@@ -21,7 +21,7 @@ in "kubectl get events" for its namespace shows any activity at all.`,
         apiVersion: "argoproj.io/v1alpha1",
         kind: "Application",
         metadata: {
-          name: "the-finalizer-that-blocked-cleanup",
+          name: "old-crm-sync",
           namespace: "argocd",
           annotations: { "deletion-requested-at": "2026-09-13T10:00:00Z" },
         },

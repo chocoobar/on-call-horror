@@ -21,7 +21,7 @@ away.`,
         apiVersion: "argoproj.io/v1alpha1",
         kind: "Application",
         metadata: {
-          name: "the-application-that-wouldnt-delete",
+          name: "legacy-invoicing",
           namespace: "argocd",
           annotations: { "deletion-requested-at": "2026-09-15T13:40:00Z" },
         },

@@ -1,6 +1,6 @@
 import type { K8sObject } from "@/lib/scenarios/types";
 
-function col(values: string[][]): string[] {
+export function col(values: string[][]): string[] {
   if (values.length === 0) return [];
   const widths = values[0].map((_, i) => Math.max(...values.map((row) => row[i].length)) + 2);
   return values.map((row) => row.map((cell, i) => cell.padEnd(widths[i])).join("").trimEnd());
@@ -99,6 +99,22 @@ export function renderTable(kind: string, items: K8sObject[], opts: { showNamesp
       return col([header, ...rows]);
     }
   }
+}
+
+/** `kubectl get events` - flattens every resource's own `events` list into one table, like the real command. */
+export function renderEvents(items: K8sObject[], opts: { showNamespace?: boolean } = {}): string[] {
+  const nsCol = opts.showNamespace ? ["NAMESPACE"] : [];
+  const rows: string[][] = [];
+  for (const o of items) {
+    for (const e of o.events ?? []) {
+      const nsVal = opts.showNamespace ? [o.metadata.namespace ?? "default"] : [];
+      const object = `${o.kind.toLowerCase()}/${o.metadata.name}`;
+      rows.push([...nsVal, e.age, e.type, e.reason, object, e.message]);
+    }
+  }
+  if (rows.length === 0) return [];
+  const header = [...nsCol, "LAST SEEN", "TYPE", "REASON", "OBJECT", "MESSAGE"];
+  return col([header, ...rows]);
 }
 
 function dumpSection(title: string, value: Record<string, unknown> | undefined): string[] {

@@ -1,6 +1,6 @@
 import type { K8sObject, ScenarioWorld } from "@/lib/scenarios/types";
 import { tokenize, parseArgs, normalizeKind, matchesSelector } from "./parse";
-import { renderTable, describeObject } from "./format";
+import { renderTable, renderEvents, describeObject } from "./format";
 import { toYamlLines } from "./yaml";
 import { formatArgocdAppGet, formatArgocdAppDiff } from "./argocd";
 
@@ -36,10 +36,51 @@ function findByKindNameNs(world: ScenarioWorld, kind: string, name: string, name
   );
 }
 
+const GET_ALL_KINDS = [
+  ["Pod", "pod"],
+  ["Service", "service"],
+  ["Deployment", "deployment.apps"],
+  ["StatefulSet", "statefulset.apps"],
+  ["DaemonSet", "daemonset.apps"],
+  ["Job", "job.batch"],
+  ["CronJob", "cronjob.batch"],
+] as const;
+
+function scopeByNamespace<T extends K8sObject>(items: T[], parsed: ReturnType<typeof parseArgs>): T[] {
+  if (parsed.allNamespaces || !parsed.namespace) return items;
+  return items.filter((r) => (r.metadata.namespace ?? "default") === parsed.namespace);
+}
+
+function kubectlGetAll(parsed: ReturnType<typeof parseArgs>, world: ScenarioWorld): CommandOutput {
+  const scoped = scopeByNamespace(world.resources, parsed);
+  const sections: string[][] = [];
+  for (const [kind, prefix] of GET_ALL_KINDS) {
+    const items = scoped.filter((r) => r.kind === kind);
+    if (items.length === 0) continue;
+    const prefixed = items.map((o) => ({ ...o, metadata: { ...o.metadata, name: `${prefix}/${o.metadata.name}` } }));
+    sections.push(renderTable(kind, prefixed, { showNamespace: parsed.allNamespaces }));
+  }
+  if (sections.length === 0) {
+    return ok([`No resources found${parsed.namespace ? ` in ${parsed.namespace} namespace` : ""}.`]);
+  }
+  return ok(sections.flatMap((s, i) => (i < sections.length - 1 ? [...s, ""] : s)));
+}
+
+function kubectlGetEvents(parsed: ReturnType<typeof parseArgs>, world: ScenarioWorld): CommandOutput {
+  const scoped = scopeByNamespace(world.resources, parsed);
+  const lines = renderEvents(scoped, { showNamespace: parsed.allNamespaces });
+  if (lines.length === 0) {
+    return ok([`No resources found${parsed.namespace ? ` in ${parsed.namespace} namespace` : ""}.`]);
+  }
+  return ok(lines);
+}
+
 function kubectlGet(args: string[], world: ScenarioWorld): CommandOutput {
   const parsed = parseArgs(args);
   const [kindRaw, nameArg] = parsed.positional;
   if (!kindRaw) return err(["error: you must specify the type of resource to get"]);
+  if (["all"].includes(kindRaw.toLowerCase())) return kubectlGetAll(parsed, world);
+  if (["events", "event", "ev"].includes(kindRaw.toLowerCase())) return kubectlGetEvents(parsed, world);
   const kind = normalizeKind(kindRaw);
 
   let matches = world.resources.filter((r) => r.kind === kind);
@@ -176,6 +217,8 @@ const HELP_TEXT = [
   "Available commands (read-only investigation console):",
   "",
   "  kubectl get <kind> [name] [-n namespace] [-A] [-l selector] [-o yaml|json]",
+  "  kubectl get all [-n namespace]",
+  "  kubectl get events [-n namespace]",
   "  kubectl describe <kind> <name> [-n namespace]",
   "  kubectl logs <pod> [-n namespace] [-c container] [--previous]",
   "  argocd app get <name>",
@@ -183,10 +226,11 @@ const HELP_TEXT = [
   "  clear",
   "  help",
   "",
-  "Kinds: pod, deployment, service, configmap, application, appproject, job,",
-  "       ingress, networkpolicy, servicemonitor, prometheusrule, statefulset,",
-  "       persistentvolumeclaim, resourcequota, poddisruptionbudget,",
-  "       horizontalpodautoscaler",
+  "Kinds: pod, deployment, service, configmap, application, applicationset,",
+  "       appproject, job, cronjob, ingress, networkpolicy, servicemonitor,",
+  "       prometheusrule, statefulset, daemonset, persistentvolumeclaim,",
+  "       resourcequota, poddisruptionbudget, horizontalpodautoscaler,",
+  "       secret, namespace, node, and more (any real kind name works).",
   "'k' works as a shorthand for 'kubectl'.",
 ];
 
