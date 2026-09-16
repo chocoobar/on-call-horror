@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:scenarios": "node scripts/generate-scenario-index.mjs",
+    "predev": "npm run generate:scenarios",
+    "prebuild": "npm run generate:scenarios",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

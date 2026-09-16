@@ -33,11 +33,15 @@ deployable to GitHub Pages, Netlify, or any static host.
 
 ## How it works
 
-- `lib/scenarios/*.ts` - one file per scenario: briefing, constraints, a mock
-  cluster state (`world.resources`, a list of `K8sObject`s shaped like real
-  Kubernetes/ArgoCD API objects), progressive hints, and a multiple-choice
-  diagnosis (one correct option, three plausible wrong ones, each with an
-  explanation).
+- `lib/scenarios/<topic>/*.ts` - one file per scenario, grouped into a folder
+  per topic (`kubernetes/`, `argocd/`, `spring-boot/`, `observability/`,
+  `networking/`, `java-bugs/`): briefing, constraints, a mock cluster state
+  (`world.resources`, a list of `K8sObject`s shaped like real Kubernetes/
+  ArgoCD API objects), progressive hints, and a multiple-choice diagnosis
+  (one correct option, three plausible wrong ones, each with an
+  explanation). `lib/scenarios/generated.ts` (gitignored, rebuilt by `npm run
+  generate:scenarios` / `dev` / `build`) is the single generated list of
+  every scenario file - nothing needs to be registered by hand.
 - `lib/terminal/` - a small mock `kubectl`/`argocd` interpreter: parses the
   typed command, looks resources up in the current scenario's `world`, and
   renders realistic `get` tables, `describe` output, and `logs`. Mutating
@@ -60,13 +64,20 @@ its own static page.
 
 ## Adding a new scenario
 
-Add a new file in `lib/scenarios/` following the `Scenario` type in
-`lib/scenarios/types.ts`, then register it in `lib/scenarios/index.ts`. Use
-an existing scenario (e.g. `stuck-at-3am.ts`) as a template:
+Add a new file under `lib/scenarios/<topic>/` (filename and the scenario's
+`id` field must match, e.g. `lib/scenarios/kubernetes/the-thing.ts` needs
+`id: "the-thing"`) following the `Scenario` type in `lib/scenarios/types.ts`.
+That's it - no separate registration step. `npm run generate:scenarios`
+(which `dev`/`build` also run automatically) scans every topic folder and
+regenerates `lib/scenarios/generated.ts`; it fails loudly if a file's `id`
+doesn't match its filename, its `topic` field doesn't match its folder, or
+two scenarios collide on `id` or export name. Use an existing scenario
+(e.g. `lib/scenarios/argocd/stuck-at-3am.ts`) as a template:
 
-- `topic` - which side nav section it belongs to (an id from
-  `lib/topics.ts`). To add a whole new topic, add an entry to `TOPICS` in
-  `lib/topics.ts` first.
+- `topic` - which side nav section it belongs to, and which folder the file
+  lives in (an id from `lib/topics.ts`). To add a whole new topic, add an
+  entry to `TOPICS` in `lib/topics.ts` and create the matching
+  `lib/scenarios/<id>/` folder first.
 - `world.resources` - the mock objects that exist when the scenario starts.
   Only `apiVersion`/`kind`/`metadata`/`spec`/`status` are ever shown to the
   player (via `-o yaml`/`-o json`/`describe`); `age`, `events`, `logs`, and
