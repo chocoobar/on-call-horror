@@ -67,7 +67,6 @@ and the underlying VM is confirmed still running and reachable over SSH.`,
     },
     {
       id: "network-partition-to-apiserver",
-      request: undefined,
       label: "A network partition is preventing worker-node-31 from reaching the API server.",
       explanation:
         "The kubelet's own logs show it successfully *reaching* the API server and getting a specific, well-formed TLS rejection (`certificate has expired`) rather than a connection timeout or network-unreachable error - that's evidence of a completed network connection followed by an authentication failure, not a partition preventing connectivity at all.",

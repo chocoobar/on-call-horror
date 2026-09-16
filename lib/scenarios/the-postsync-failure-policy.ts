@@ -121,7 +121,7 @@ someone intervening - even though the actual application doesn't depend
 on it at all.
 
 Immediate fix: manually retry the hook by deleting the failed Job (its
-own `hook-delete-policy: BeforeHookCreation` means a fresh sync/retry
+own \`hook-delete-policy: BeforeHookCreation\` means a fresh sync/retry
 will recreate it cleanly):
 
 \`\`\`

@@ -10,7 +10,7 @@ export const theTruncatedSpan: Scenario = {
   timeMinutes: 15,
   tags: ["opentelemetry", "collector", "tracing"],
   briefing: `Debugging failures on "quote-builder" via tracing is going nowhere -
-every failed span's `exception.message` attribute cuts off mid-sentence
+every failed span's \`exception.message\` attribute cuts off mid-sentence
 at almost exactly the same length, regardless of what the actual
 underlying error was. Different bugs, different stack traces, same
 suspiciously identical cutoff point.`,

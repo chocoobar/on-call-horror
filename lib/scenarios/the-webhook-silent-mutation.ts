@@ -144,7 +144,7 @@ permanently-approved exception, or whether the shared node pool needs
 capacity planning to comfortably accommodate it. Either way, the bigger
 process gap is that this webhook's mutations are only visible by reading
 annotations after the fact - a cluster-wide policy that silently rewrites
-submitted manifests is worth being much louder about (a `kubectl diff`
+submitted manifests is worth being much louder about (a \`kubectl diff\`
 habit, or surfacing mutation events somewhere visible) so the next
 engineer doesn't lose an hour to the same mystery.`,
 };

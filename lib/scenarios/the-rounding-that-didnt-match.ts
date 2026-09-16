@@ -105,7 +105,7 @@ many transactions) only actually disagree when the value being rounded
 lands exactly on the halfway point of the digit being dropped - which is
 precisely why this discrepancy is rare, and only surfaces for specific
 tax rate and quantity combinations that happen to produce an exact
-`...5` at the rounding boundary, rather than showing up on every single
+\`...5\` at the rounding boundary, rather than showing up on every single
 transaction.
 
 The fix is using one single, shared rounding mode (and ideally one
@@ -124,7 +124,7 @@ public static BigDecimal computeTaxInclusiveTotal(BigDecimal subtotal, BigDecima
 The general rule: any monetary value that needs to match exactly across
 two independently-implemented code paths (a receipt and an actual
 charge, for example) should be computed by one single shared function,
-not reimplemented twice - even functionally-equivalent-looking `BigDecimal`
-arithmetic can diverge by a cent whenever two different `RoundingMode`
+not reimplemented twice - even functionally-equivalent-looking \`BigDecimal\`
+arithmetic can diverge by a cent whenever two different \`RoundingMode\`
 values are used for the same nominally-identical calculation.`,
 };

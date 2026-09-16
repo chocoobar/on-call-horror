@@ -11,7 +11,7 @@ export const theSharedCacheCountedThrice: Scenario = {
   tags: ["grafana", "redis", "metrics"],
   briefing: `The "shared-cache-ops" panel on the platform capacity dashboard shows
 Redis operations per second roughly triple what the cluster's own
-internal `INFO` stats and CloudWatch-equivalent metrics report for the
+internal \`INFO\` stats and CloudWatch-equivalent metrics report for the
 same window. Nobody's panicking yet, but capacity planning based on this
 dashboard would massively overprovision, and the discrepancy has to be
 explained before anyone trusts it for anything.`,
@@ -131,7 +131,7 @@ Any metric describing a genuinely *shared* piece of infrastructure -
 a shared cache, a shared queue, a shared database - is a natural spot for
 this kind of accidental duplication once more than one team starts
 independently monitoring the same thing. It's worth periodically checking
-`count(up{job=~".*redis.*"}) by (instance)` style queries against shared
+\`count(up{job=~".*redis.*"}) by (instance)\` style queries against shared
 infra to catch redundant exporters before they quietly multiply a
 capacity number.`,
 };

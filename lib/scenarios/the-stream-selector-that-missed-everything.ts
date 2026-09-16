@@ -12,7 +12,7 @@ export const theStreamSelectorThatMissedEverything: Scenario = {
   briefing: `An engineer trying to debug an intermittent issue on "shipment-tracker"
 runs a LogQL query in Grafana Explore for its logs over the past week and
 gets nothing back - not a partial result, not an error, a completely
-empty result set. `kubectl logs` on any of its pods shows plenty of
+empty result set. \`kubectl logs\` on any of its pods shows plenty of
 recent, normal activity.`,
   constraints: [
     "The Loki cluster itself is confirmed healthy, actively ingesting and serving queries correctly for every other service checked.",

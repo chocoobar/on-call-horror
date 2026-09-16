@@ -10,7 +10,7 @@ export const theRandomThatCollided: Scenario = {
   timeMinutes: 20,
   tags: ["java25", "concurrency", "random"],
   briefing: `"voucher-generator" mints a unique 8-digit voucher code for every
-completed checkout, using a shared, seeded `Random` instance kept as a
+completed checkout, using a shared, seeded \`Random\` instance kept as a
 static field. Under heavy concurrent checkout traffic, a small but
 growing number of vouchers have been issued as exact duplicates -
 something the code's uniqueness constraint was supposed to make
@@ -108,7 +108,7 @@ during heavy concurrent checkout traffic, essentially never during
 lighter load.
 
 The fix is giving each thread its own generator state, using
-`java.util.concurrent.ThreadLocalRandom`, designed specifically for
+\`java.util.concurrent.ThreadLocalRandom\`, designed specifically for
 this:
 
 \`\`\`java
@@ -121,8 +121,8 @@ public String generate() {
 \`ThreadLocalRandom\` maintains separate generator state per thread with
 no shared mutable state at all, eliminating the collision risk entirely
 without sacrificing performance (no synchronization needed). The general
-rule: a single `java.util.Random` instance shared across multiple
+rule: a single \`java.util.Random\` instance shared across multiple
 threads is a correctness risk under concurrent access, not just a
-performance one - use `ThreadLocalRandom` for concurrent code, or give
-each thread (or each call) its own dedicated `Random` instance.`,
+performance one - use \`ThreadLocalRandom\` for concurrent code, or give
+each thread (or each call) its own dedicated \`Random\` instance.`,
 };

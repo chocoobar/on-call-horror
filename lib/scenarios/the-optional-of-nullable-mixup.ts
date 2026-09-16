@@ -10,10 +10,10 @@ export const theOptionalOfNullableMixup: Scenario = {
   timeMinutes: 18,
   tags: ["java25", "optional", "null-handling"],
   briefing: `A recent refactor wrapped several nullable customer profile fields in
-`Optional` for cleaner downstream code. Since then, roughly a third of
+\`Optional\` for cleaner downstream code. Since then, roughly a third of
 profile page loads throw an exception during rendering - always for
 customers who never provided an optional field like middle name in the
-first place, exactly the case `Optional` was supposed to handle
+first place, exactly the case \`Optional\` was supposed to handle
 gracefully.`,
   constraints: [
     "The underlying customer record correctly and legitimately stores `null` for any optional field the customer never provided - this is expected, valid data, not a data-quality problem.",
@@ -122,8 +122,8 @@ The general rule: \`Optional.of(...)\` is for values that must never be
 null - use it only when a null argument would itself indicate a bug
 elsewhere. Any field or value that's legitimately, expectedly nullable
 should be wrapped with \`Optional.ofNullable(...)\`, and any transformation
-applied to it (like \`.trim()\`) should happen through `Optional`'s own
-`.map(...)`, which safely skips the transformation entirely when the
+applied to it (like \`.trim()\`) should happen through \`Optional\`'s own
+\`.map(...)\`, which safely skips the transformation entirely when the
 value is absent, rather than being applied eagerly to a value that might
 not exist.`,
 };

@@ -16,6 +16,8 @@ export interface K8sObject {
     namespace?: string;
     labels?: Record<string, string>;
     annotations?: Record<string, string>;
+    finalizers?: string[];
+    deletionTimestamp?: string;
   };
   spec?: Record<string, unknown>;
   status?: Record<string, unknown>;

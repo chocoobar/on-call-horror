@@ -136,7 +136,7 @@ Once corrected, session-store-pdb no longer accidentally covers
 auth-cache's pods, and the drain can proceed against each service
 independently as intended. It's worth auditing every other PDB in this
 namespace (and generally, cluster-wide) for the same class of mistake -
-using a broad, shared label like `tier: cache` in a PDB selector, rather
+using a broad, shared label like \`tier: cache\` in a PDB selector, rather
 than something guaranteed unique to one Deployment, is exactly how two
 otherwise-unrelated services end up silently entangled in each other's
 disruption budgets.`,

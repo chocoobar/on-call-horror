@@ -91,7 +91,7 @@ time.`,
   ],
   correctOptionId: "orphaned-readiness-gate-never-set",
   resolution: `The new pod's own status shows exactly where the rollout is stuck: the
-standard \`Ready\` condition is `True`, but a custom condition,
+standard \`Ready\` condition is \`True\`, but a custom condition,
 \`app.internal/cache-warmed\`, sits at \`False\`. \`user-profile-readiness-gate-notes\`
 explains why it'll stay that way forever: this readiness gate requires an
 external controller to explicitly set that condition, and that

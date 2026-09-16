@@ -78,7 +78,6 @@ just... nothing moving.`,
     },
     {
       id: "current-node-hardware-issue",
-      request: undefined,
       label: "The currently-draining node itself has a hardware or connectivity issue preventing eviction.",
       explanation:
         "The pod on the currently-draining node is confirmed healthy and Ready, and the blocking event is specifically a PDB violation (`FailedEviction`), not any node-health or connectivity-related failure - the current node is not itself the source of the problem, it's simply the one that happened to run out of PDB headroom to drain into.",

@@ -10,7 +10,7 @@ export const theInternedStringThatWasnt: Scenario = {
   timeMinutes: 20,
   tags: ["java25", "string-interning", "performance"],
   briefing: `An engineer added a fast-path optimization to "flag-resolver": if a flag
-name reference is identical (`==`) to one of a small set of pre-interned
+name reference is identical (\`==\`) to one of a small set of pre-interned
 "hot" flag names, skip the expensive database lookup and return a cached
 value directly. Since deploying it, a specific flag has intermittently
 returned stale values instead of hitting the fast path reliably or
@@ -108,7 +108,7 @@ depending entirely on each caller's origin rather than the flag's actual
 value.
 
 The fix is comparing by content instead of reference identity - which
-gives up essentially nothing in practice, since `String.equals()` for
+gives up essentially nothing in practice, since \`String.equals()\` for
 two identical strings, including two interned ones, is extremely fast
 via a length/hashcode short-circuit:
 
@@ -127,8 +127,8 @@ comparing would restore correctness (interning forces it into the shared
 pool, making it identical to \`HOT_FLAG_CONSTANT\` if content matches) - but
 this reintroduces string pool memory/performance trade-offs of its own,
 and \`.equals()\` is almost always the better choice. The general rule:
-\`==\` on `String` only reliably matches for genuinely interned strings -
+\`==\` on \`String\` only reliably matches for genuinely interned strings -
 literals in source code, or strings explicitly passed through
-`.intern()` - never assume a runtime-constructed string will be `==` to
+\`.intern()\` - never assume a runtime-constructed string will be \`==\` to
 a matching literal elsewhere, no matter how identical its content is.`,
 };

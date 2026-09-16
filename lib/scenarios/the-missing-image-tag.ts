@@ -104,7 +104,7 @@ kubectl set image deployment/notification-worker \\
 The rollout then proceeds normally against an image that actually
 exists. To prevent a repeat, the more durable fix is removing the manual
 step entirely - having CI itself trigger the deploy with the exact tag it
-just pushed (via a templated manifest, Helm value, or `kubectl set image`
+just pushed (via a templated manifest, Helm value, or \`kubectl set image\`
 call baked into the pipeline) instead of relying on someone to correctly
 transcribe a tag by hand.`,
 };

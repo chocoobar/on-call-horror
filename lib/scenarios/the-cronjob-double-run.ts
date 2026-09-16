@@ -117,8 +117,8 @@ with itself at all - adding a simple lock (a lease, a lock file with a
 PID/timestamp check, or a transactional write instead of in-place
 read-modify-write) would make even an accidental manual overlap safe
 rather than corrupting. Finally, worth clarifying for on-call: a
-transient `Pending` state on a fresh pod is often completely normal for
+transient \`Pending\` state on a fresh pod is often completely normal for
 the first several seconds and isn't itself evidence of failure - a
-`kubectl describe`/`get events` check before assuming a job failed and
+\`kubectl describe\`/\`get events\` check before assuming a job failed and
 manually retriggering it would have avoided this entirely.`,
 };

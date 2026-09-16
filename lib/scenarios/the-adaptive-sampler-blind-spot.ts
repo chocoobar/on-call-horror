@@ -9,12 +9,12 @@ export const theAdaptiveSamplerBlindSpot: Scenario = {
   topic: "observability",
   timeMinutes: 25,
   tags: ["tracing", "adaptive-sampling", "jaeger"],
-  briefing: `A rare failure mode on booking-api's `/confirm` endpoint - roughly 1 in
+  briefing: `A rare failure mode on booking-api's \`/confirm\` endpoint - roughly 1 in
 20,000 requests - has been reported by customers three separate times
 this quarter. Every other endpoint on booking-api has plenty of traces
 available whenever needed, sampled generously. Searching for a trace of
-`/confirm` specifically, at any time, for any outcome, turns up almost
-nothing - even successful `/confirm` traces are strangely rare compared
+\`/confirm\` specifically, at any time, for any outcome, turns up almost
+nothing - even successful \`/confirm\` traces are strangely rare compared
 to how often the endpoint is actually called.`,
   constraints: [
     "booking-api's own request-count metric confirms `/confirm` is called roughly as often as several other endpoints that do have plenty of available traces.",

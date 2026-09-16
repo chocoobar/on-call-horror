@@ -9,7 +9,7 @@ export const theRelabelRuleThatDroppedTooMuch: Scenario = {
   topic: "observability",
   timeMinutes: 15,
   tags: ["prometheus", "relabeling", "metrics"],
-  briefing: `Three days ago, someone added a `metric_relabel_configs` drop rule to
+  briefing: `Three days ago, someone added a \`metric_relabel_configs\` drop rule to
 Prometheus's scrape config to cut down on a flood of noisy debug metrics
 from various services. Since then, "warehouse-sync"'s error-count metric -
 a completely unrelated, legitimate, low-cardinality metric the on-call

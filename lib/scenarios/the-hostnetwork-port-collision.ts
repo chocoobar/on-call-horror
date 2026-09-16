@@ -114,7 +114,7 @@ the first place. If the goal was genuinely "more than one instance
 capturing traffic on the same node" (rather than just "more total
 capacity somewhere"), each replica needs a distinct port, coordinated
 somehow across the pods sharing a node - awkward and fragile with plain
-`hostNetwork`, typically requiring a startup script that probes for a
+\`hostNetwork\`, typically requiring a startup script that probes for a
 free port in a range rather than a single hardcoded value. If instead
 the real goal was broader coverage or capacity rather than strict
 per-node duplication, the simpler and much more common fix is running

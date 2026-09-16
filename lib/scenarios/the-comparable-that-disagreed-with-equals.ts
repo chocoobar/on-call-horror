@@ -9,7 +9,7 @@ export const theComparableThatDisagreedWithEquals: Scenario = {
   topic: "java-bugs",
   timeMinutes: 22,
   tags: ["java25", "comparable", "treeset"],
-  briefing: `The triage board keeps open tickets in a `TreeSet<Ticket>` sorted by due
+  briefing: `The triage board keeps open tickets in a \`TreeSet<Ticket>\` sorted by due
 date, for a clean chronological view. Support agents have reported
 tickets randomly disappearing from the board - not resolved, not
 closed, just gone - and it always seems to happen right after two

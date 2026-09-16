@@ -120,7 +120,7 @@ dependency resolution is fully finalized, against the exact jar set that
 will actually ship:
 
 \`\`\`
-1. resolve dependencies (lock file, `mvn dependency:resolve`, etc.)
+1. resolve dependencies (lock file, \`mvn dependency:resolve\`, etc.)
 2. build application jar
 3. run -Xshare:dump against the FINAL, resolved classpath
 4. bake the resulting archive into the image

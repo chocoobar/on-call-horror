@@ -9,7 +9,7 @@ export const theLogAgentThatFilledTheDisk: Scenario = {
   topic: "observability",
   timeMinutes: 20,
   tags: ["fluentd", "disk-pressure", "logging"],
-  briefing: `Node "worker-node-14" started evicting pods under `DiskPressure` this
+  briefing: `Node "worker-node-14" started evicting pods under \`DiskPressure\` this
 morning, seemingly at random - the evicted pods themselves are unrelated
 services with nothing in common, none of them writing unusual amounts of
 data anywhere obvious. Nobody deployed anything to this node recently.

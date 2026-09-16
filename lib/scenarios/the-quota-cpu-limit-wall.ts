@@ -94,12 +94,12 @@ this namespace's quota already accounted for the difference between that
 theoretical 10 and the 9 that actually came up. This is a ResourceQuota
 admission rejection happening at Pod-creation time, which is why the
 missing 6 replicas never existed as Pod objects at all - no
-`Pending`, no scheduling failure, just an absence, with the actual
+\`Pending\`, no scheduling failure, just an absence, with the actual
 rejection recorded only on the ReplicaSet's own Events rather than
 anywhere more visible.
 
 There's no live fix from this read-only console, but the real options
-are: raise the namespace's `limits.cpu` quota to actually support the
+are: raise the namespace's \`limits.cpu\` quota to actually support the
 launch's target replica count (coordinating with whoever owns quota
 budgeting, since other tenants share it), or reduce video-transcoder's
 per-replica CPU limit if 4 cores has more headroom than it actually
@@ -111,7 +111,7 @@ spec:
     limits.cpu: "70"   # covers 15 replicas at 4 cores, plus existing tenants
 \`\`\`
 
-For the future, it's worth sizing ResourceQuota `limits.cpu` values with
+For the future, it's worth sizing ResourceQuota \`limits.cpu\` values with
 an explicit awareness of what a single replica's *limit* (not just its
 request) actually costs against the budget - a quota number that looks
 generous in isolation can turn out to only support a fraction of the

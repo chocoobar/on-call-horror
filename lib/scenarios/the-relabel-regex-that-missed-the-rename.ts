@@ -12,7 +12,7 @@ export const theRelabelRegexThatMissedTheRename: Scenario = {
   briefing: `A rename of "invoice-svc" to "invoice-generator" - just a label and
 Deployment name update, no actual functional change - went out last
 week, and every Grafana panel for it has shown "No data" ever since. The
-new pods are confirmed Running and Ready, and the service's `/metrics`
+new pods are confirmed Running and Ready, and the service's \`/metrics\`
 endpoint responds normally when checked directly.`,
   constraints: [
     "Every other recently-renamed service in the cluster picked up correctly under its new name with no dashboard interruption.",

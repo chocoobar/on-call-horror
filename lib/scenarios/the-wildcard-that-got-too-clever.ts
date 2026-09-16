@@ -9,7 +9,7 @@ export const theWildcardThatGotTooClever: Scenario = {
   topic: "java-bugs",
   timeMinutes: 22,
   tags: ["java25", "generics", "raw-types"],
-  briefing: `A generic `BinGroup<T extends Item>` class enforces (at compile time) that
+  briefing: `A generic \`BinGroup<T extends Item>\` class enforces (at compile time) that
 only one item subtype can be added to a given bin group. A recent
 integration with a legacy restocking system bypasses that safety
 entirely - electronics pallets have started appearing in produce bin
@@ -125,6 +125,6 @@ The general rule: a raw type isn't a lightweight equivalent to a
 wildcard - it disables generic type checking entirely for every
 operation on that reference, silently reintroducing exactly the kind of
 type-confusion bug generics exist to prevent at compile time. Reach for
-a wildcard (`<?>`) or a properly parameterized method instead of a raw
+a wildcard (\`<?>\`) or a properly parameterized method instead of a raw
 type whenever interoperating with legacy, non-generic code.`,
 };

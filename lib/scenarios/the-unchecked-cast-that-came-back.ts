@@ -9,7 +9,7 @@ export const theUncheckedCastThatCameBack: Scenario = {
   topic: "java-bugs",
   timeMinutes: 22,
   tags: ["java25", "generics", "type-safety"],
-  briefing: `"analytics-exporter" reads a generic, reusable `MetricBucket<T>` cache
+  briefing: `"analytics-exporter" reads a generic, reusable \`MetricBucket<T>\` cache
 that different upstream jobs populate with different metric types. A
 few hours into the nightly export, it crashes with a
 ClassCastException on a bucket that was populated hours earlier by a
@@ -122,6 +122,6 @@ lookup key explicitly, catching mismatches earlier. The general rule: a
 shared, string-keyed registry of generically-typed objects relies
 entirely on every caller manually agreeing on what type each key holds -
 type erasure gives the compiler no way to verify that agreement, and a
-mismatch surfaces only as a runtime `ClassCastException`, often far from
+mismatch surfaces only as a runtime \`ClassCastException\`, often far from
 where the actual mistaken assumption was made.`,
 };

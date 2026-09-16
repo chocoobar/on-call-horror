@@ -9,7 +9,7 @@ export const theAnnotationThatWasntInherited: Scenario = {
   topic: "java-bugs",
   timeMinutes: 20,
   tags: ["java25", "annotations", "reflection"],
-  briefing: `A custom `@Auditable` annotation on a base class triggers an audit-log
+  briefing: `A custom \`@Auditable\` annotation on a base class triggers an audit-log
 entry for every subclass's method calls, handled by a reflection-based
 interceptor. A new payment adjustment feature was built as an interface
 implementation instead of a subclass, following a team style
@@ -105,12 +105,12 @@ JDK deliberately doesn't attempt to resolve automatically.
 correctly propagates \`@Auditable\` down to every subclass via this
 mechanism, which is why every existing, class-inheritance-based service
 audits correctly - but \`AdjustmentService\` is an interface, and
-`@Inherited` simply doesn't reach implementing classes at all, leaving
-`AdjustmentServiceImpl` with no detectable `@Auditable` annotation from
+\`@Inherited\` simply doesn't reach implementing classes at all, leaving
+\`AdjustmentServiceImpl\` with no detectable \`@Auditable\` annotation from
 reflection's point of view.
 
 The fix is applying the annotation directly to the implementing class
-(since `@Inherited` can't bridge the interface gap automatically), or
+(since \`@Inherited\` can't bridge the interface gap automatically), or
 having the interceptor also check implemented interfaces explicitly:
 
 \`\`\`java

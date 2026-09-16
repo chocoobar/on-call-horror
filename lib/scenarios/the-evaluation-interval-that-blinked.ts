@@ -13,7 +13,7 @@ export const theEvaluationIntervalThatBlinked: Scenario = {
 finds a clear, real five-minute spike in error rate a few hours ago -
 well above the alert threshold. No alert ever fired. The Grafana-managed
 alert rule for catalog-sync's error rate is confirmed enabled and
-correctly written, with a `for` duration well under five minutes.`,
+correctly written, with a \`for\` duration well under five minutes.`,
   constraints: [
     "The error spike is confirmed real via catalog-sync's own logs and downstream retry metrics for the same five-minute window.",
   ],

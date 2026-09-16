@@ -117,7 +117,7 @@ loops back into the same problem.
 
 Breaking the deadlock requires stepping outside the normal path. Two
 options, in order of preference: if cluster-admin access allows it,
-temporarily exempt `platform-policy` from the webhook's own rules to let
+temporarily exempt \`platform-policy\` from the webhook's own rules to let
 a fix through:
 
 \`\`\`yaml

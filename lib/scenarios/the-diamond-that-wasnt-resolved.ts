@@ -9,9 +9,9 @@ export const theDiamondThatWasntResolved: Scenario = {
   topic: "java-bugs",
   timeMinutes: 22,
   tags: ["java25", "default-methods", "interfaces"],
-  briefing: `A new `PremiumShipping` class was written to combine behavior from two
-existing interfaces, `Discountable` and `Taxable`, both of which happen
-to define their own default `adjust(double)` method for slightly
+  briefing: `A new \`PremiumShipping\` class was written to combine behavior from two
+existing interfaces, \`Discountable\` and \`Taxable\`, both of which happen
+to define their own default \`adjust(double)\` method for slightly
 different reasons. The class compiled without any visible error, but its
 shipping cost adjustment quietly applies the wrong interface's logic in
 production.`,

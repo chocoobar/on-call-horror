@@ -108,7 +108,7 @@ abruptly:
 \`\`\`yaml
 # cluster-autoscaler / node group config
 scaleDownGracePeriod: 10m   # or equivalent for the provider in use
-```
+\`\`\`
 \`\`\`
 
 ensuring pods (and their volumes) get a clean, orderly handoff instead

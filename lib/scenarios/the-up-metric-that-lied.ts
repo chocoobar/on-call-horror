@@ -11,7 +11,7 @@ export const theUpMetricThatLied: Scenario = {
   tags: ["prometheus", "scrape-config", "up-metric"],
   briefing: `Customers report they stopped receiving any push notifications for about
 forty minutes this morning. "notification-dispatcher"'s own dashboard,
-built around the standard `up{job="notification-dispatcher"}` metric,
+built around the standard \`up{job="notification-dispatcher"}\` metric,
 shows a flawless, unbroken line at 1 (up) for the entire period - not a
 single blip.`,
   constraints: [

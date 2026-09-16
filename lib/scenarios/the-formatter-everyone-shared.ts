@@ -10,7 +10,7 @@ export const theFormatterEveryoneShared: Scenario = {
   timeMinutes: 20,
   tags: ["java25", "simpledateformat", "concurrency"],
   briefing: `"invoice-printer" formats each invoice's delivery date using a shared,
-pre-built `SimpleDateFormat` instance kept as a static field for
+pre-built \`SimpleDateFormat\` instance kept as a static field for
 efficiency. During the morning batch-print rush, when many invoices
 print concurrently, a small number come out with a wildly incorrect
 delivery date - a completely different month or year than the order

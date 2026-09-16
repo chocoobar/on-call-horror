@@ -107,7 +107,7 @@ one whenever the underlying quantity is meant to be summed, like a queue
 depth or a request count, especially when it can legitimately be
 unevenly distributed across workers.
 
-The fix is switching the panel to `sum()`, which reflects the real total
+The fix is switching the panel to \`sum()\`, which reflects the real total
 regardless of how unevenly it's distributed across replicas:
 
 \`\`\`promql

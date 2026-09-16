@@ -108,7 +108,7 @@ transaction to roll back) never gets the chance to fire. The outer
 transaction sees no error at all and commits the refund as completed.
 
 The fix is deciding deliberately whether the ledger write should really
-be independent of the refund status, and if not, removing `REQUIRES_NEW`
+be independent of the refund status, and if not, removing \`REQUIRES_NEW\`
 and letting a failure actually roll back the whole operation:
 
 \`\`\`java

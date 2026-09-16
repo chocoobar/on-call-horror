@@ -109,8 +109,8 @@ regardless of how often the same category combination is genuinely
 requested.
 
 The fix is using a key type that compares by content, either a standard
-`List` implementation (which correctly implements value-based
-`equals()`/`hashCode()`) or an explicit override on the custom type:
+\`List\` implementation (which correctly implements value-based
+\`equals()\`/\`hashCode()\`) or an explicit override on the custom type:
 
 \`\`\`java
 public List<String> parseCategories(HttpRequest req) {
@@ -119,11 +119,11 @@ public List<String> parseCategories(HttpRequest req) {
 }
 \`\`\`
 
-The general rule: any type used as a `HashMap`/`HashSet` key must have
-`equals()`/`hashCode()` that compare by the content that actually
+The general rule: any type used as a \`HashMap\`/\`HashSet\` key must have
+\`equals()\`/\`hashCode()\` that compare by the content that actually
 identifies "the same key" - a custom collection or wrapper type that
 skips this (often for a narrow performance reason unrelated to its use
-as a map key) will silently defeat any `HashMap`-based cache or
+as a map key) will silently defeat any \`HashMap\`-based cache or
 deduplication built on top of it, with no error, just a permanently
 empty-seeming cache.`,
 };

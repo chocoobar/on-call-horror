@@ -92,7 +92,7 @@ the new value and the application's \`Environment\` picked it up. But the
 very next rejection, five minutes later, still cites \`limit=100\`.
 
 \`rate-limiter-api-notes\` shows the gap: \`RateLimitFilter\` injects its
-limit with a plain \`@Value("${rate.limit.perMinute}")\` field and has no
+limit with a plain \`@Value("\${rate.limit.perMinute}")\` field and has no
 \`@RefreshScope\` annotation on the class. Spring Cloud's \`/actuator/refresh\`
 updates the underlying \`Environment\` and notifies *refresh-scoped* beans
 to tear themselves down and get recreated with fresh values - it has no
@@ -109,7 +109,7 @@ re-reads its \`@Value\` fields) on the next refresh event:
 @Component
 public class RateLimitFilter extends OncePerRequestFilter {
 
-    @Value("${rate.limit.perMinute}")
+    @Value("\${rate.limit.perMinute}")
     private int limit;
 }
 \`\`\`

@@ -10,7 +10,7 @@ export const theNullThatBrokeThePattern: Scenario = {
   timeMinutes: 20,
   tags: ["java25", "pattern-matching", "switch"],
   briefing: `A recent cleanup rewrote the discount-code routing logic to use a modern
-pattern-matching `switch` over the code's type. Carts with any kind of
+pattern-matching \`switch\` over the code's type. Carts with any kind of
 discount code route correctly. Carts with no discount code at all -
 previously the most common, unremarkable case - now throw an exception
 and fail checkout entirely.`,

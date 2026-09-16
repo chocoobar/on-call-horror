@@ -106,7 +106,7 @@ the next morning confirms there was never a genuine, sustained outage -
 every page was a real, if momentary and harmless, condition being treated
 with the same urgency as a real, sustained outage would deserve.
 
-The fix is adding a `for:` duration long enough to ride out routine,
+The fix is adding a \`for:\` duration long enough to ride out routine,
 few-second scrape blips while still catching a genuinely sustained
 outage promptly:
 
@@ -117,9 +117,9 @@ outage promptly:
   labels: { severity: critical }
 \`\`\`
 
-Any alert rule built around `up{}` or similar binary health signals
-should almost always carry a `for:` clause proportional to how much
+Any alert rule built around \`up{}\` or similar binary health signals
+should almost always carry a \`for:\` clause proportional to how much
 brief, expected noise the underlying system produces - a bare condition
-with no `for:` treats a two-second blip exactly the same as a two-hour
+with no \`for:\` treats a two-second blip exactly the same as a two-hour
 outage, which is rarely the intent.`,
 };

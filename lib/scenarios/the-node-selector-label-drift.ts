@@ -107,7 +107,7 @@ kind of change that looks harmless from the node-labeling side (the
 *meaning* of the label didn't change, just its key name) while silently
 breaking every workload that pins to it by the old key.
 
-The fix is updating batch-etl's `nodeSelector` to the new key name:
+The fix is updating batch-etl's \`nodeSelector\` to the new key name:
 
 \`\`\`yaml
 spec:

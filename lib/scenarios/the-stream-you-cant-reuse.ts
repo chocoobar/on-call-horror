@@ -102,7 +102,7 @@ consumes and closes that stream object. This isn't a bug or a
 limitation that's ever meant to be worked around by careful sequencing -
 attempting *any* further operation on an already-consumed stream, even
 one built by a completely different downstream consumer like
-`buildDetailPdf`, always throws this same exception, unconditionally.
+\`buildDetailPdf\`, always throws this same exception, unconditionally.
 
 The fix is building a fresh stream (or, more simply, a reusable
 collection) for each independent consumer:
@@ -125,7 +125,7 @@ Materializing the filtered result into a \`List\` once, and calling
 a \`List\` directly, if streaming isn't actually needed), avoids the reuse
 problem entirely and also avoids re-running the filter predicate
 multiple times. The general rule: a \`Stream\` reference must never be
-stored and reused across multiple terminal operations - each `Stream`
+stored and reused across multiple terminal operations - each \`Stream\`
 pipeline is consumed exactly once; build a new one (or work from a
 materialized collection) for each independent operation that needs the
 data.`,

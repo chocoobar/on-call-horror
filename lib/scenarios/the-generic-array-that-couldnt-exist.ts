@@ -106,12 +106,12 @@ object reference (which only checks the object's actual class against
 the target at the point of use), casting an *array* reference to a more
 specific array component type requires the array's own real runtime type
 to already be compatible, which it isn't here, producing exactly this
-`ClassCastException`, deterministically, the very first time
-`snapshot()` is called (the "wraps around" framing in the incident
+\`ClassCastException\`, deterministically, the very first time
+\`snapshot()\` is called (the "wraps around" framing in the incident
 report was a red herring - it would fail on the very first snapshot,
 regardless of wraparound).
 
-The fix is either returning `Object[]` (and letting callers cast
+The fix is either returning \`Object[]\` (and letting callers cast
 individual elements, which *is* safe) or, better, using a properly typed
 collection instead of a raw generic array workaround:
 
