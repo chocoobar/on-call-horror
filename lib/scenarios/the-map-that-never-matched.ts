@@ -119,7 +119,7 @@ public int hashCode() {
 The general rule: \`equals()\` and \`hashCode()\` must always be overridden
 together, using the same set of fields - overriding one without the
 other breaks the equals/hashCode contract and silently corrupts the
-behavior of every hash-based collection (`HashSet`, `HashMap`,
-`HashTable`) the object is ever used in, usually with no exception or
+behavior of every hash-based collection (\`HashSet\`, \`HashMap\`,
+\`HashTable\`) the object is ever used in, usually with no exception or
 error to reveal it.`,
 };

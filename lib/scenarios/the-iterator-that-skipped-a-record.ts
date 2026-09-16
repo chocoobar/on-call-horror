@@ -99,8 +99,8 @@ cleanup despite being correctly identified as expired - exactly matching
 the reported pattern of the coupon right after any removed one surviving.
 
 The fix is either iterating backward (so removals never shift
-not-yet-visited indices) or using an explicit `Iterator` and its own
-`remove()` method, which is specifically designed to handle this
+not-yet-visited indices) or using an explicit \`Iterator\` and its own
+\`remove()\` method, which is specifically designed to handle this
 correctly:
 
 \`\`\`java
@@ -114,9 +114,9 @@ public void cleanup(List<Coupon> coupons) {
 }
 \`\`\`
 
-The general rule: removing elements from a `List` by index while
+The general rule: removing elements from a \`List\` by index while
 iterating it forward with a plain indexed loop silently skips the
-element immediately following each removal - use `Iterator.remove()`,
+element immediately following each removal - use \`Iterator.remove()\`,
 iterate backward, or build a new filtered list instead of mutating one
 in place while walking it forward.`,
 };

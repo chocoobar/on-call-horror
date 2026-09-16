@@ -10,8 +10,8 @@ export const theDecimalThatSpokeGerman: Scenario = {
   timeMinutes: 14,
   tags: ["java25", "locale", "number-formatting"],
   briefing: `"freight-cost-import" parses per-shipment cost figures from a text feed
-using `DecimalFormat`. Since onboarding a new European carrier, a
-consistent slice of rows fail to parse with a `ParseException`, even
+using \`DecimalFormat\`. Since onboarding a new European carrier, a
+consistent slice of rows fail to parse with a \`ParseException\`, even
 though the carrier insists (and a manual check confirms) the numbers in
 those rows are correctly formatted for their locale.`,
   constraints: [

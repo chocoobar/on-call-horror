@@ -13,7 +13,7 @@ export const theOptionalFieldThatHeldNull: Scenario = {
 before applying a signup bonus. New customers who signed up without
 being referred by anyone crash the signup flow with a
 NullPointerException, even though the field holding their referral
-information is typed `Optional<ReferralCode>` - a type that's supposed
+information is typed \`Optional<ReferralCode>\` - a type that's supposed
 to make "no value" an explicit, safe, non-null case.`,
   constraints: [
     "`Optional<ReferralCode>` is confirmed to be the field's declared type everywhere it's used - this isn't a case of a plain nullable field being mistaken for an `Optional` somewhere.",
@@ -106,7 +106,7 @@ at its default. \`ReferralChecker.hasActiveReferral\` calls
 which fails exactly for the customers this whole mechanism was supposed
 to safely represent.
 
-The fix is two-fold: always assign `Optional.empty()` explicitly, and
+The fix is two-fold: always assign \`Optional.empty()\` explicitly, and
 defend against a stray null at the point of use too:
 
 \`\`\`java
@@ -127,7 +127,7 @@ public boolean hasActiveReferral(Customer customer) {
 The general rule: \`Optional\` only delivers on its promise of eliminating
 null-related bugs if every code path that could produce "no value"
 explicitly constructs \`Optional.empty()\` - the type system does nothing
-to enforce this on its own, and an `Optional`-typed field left
-unassigned is just as capable of holding a literal `null` as any other
+to enforce this on its own, and an \`Optional\`-typed field left
+unassigned is just as capable of holding a literal \`null\` as any other
 reference type.`,
 };

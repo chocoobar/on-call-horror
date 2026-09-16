@@ -10,7 +10,7 @@ export const theScaleMismatch: Scenario = {
   timeMinutes: 14,
   tags: ["java25", "bigdecimal", "equality"],
   briefing: `"charge-dedup" is supposed to catch and block a duplicate charge attempt
-by keeping a `HashSet` of amounts already charged this session, comparing
+by keeping a \`HashSet\` of amounts already charged this session, comparing
 new charge amounts against it. A customer was double-charged $19.90
 because the dedup check let the second, identical charge straight
 through.`,
@@ -113,7 +113,7 @@ public boolean isDuplicate(BigDecimal amount) {
 }
 \`\`\`
 
-The general rule: never use \`BigDecimal\` as a `HashSet`/`HashMap` key (or
+The general rule: never use \`BigDecimal\` as a \`HashSet\`/\`HashMap\` key (or
 compare it with \`.equals()\`) unless its scale is guaranteed consistent -
 \`BigDecimal.equals()\` is scale-sensitive by design, while \`compareTo()\`
 (and the natural ordering it defines) is not; picking the wrong one for

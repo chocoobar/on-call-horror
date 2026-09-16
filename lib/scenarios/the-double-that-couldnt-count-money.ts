@@ -120,5 +120,5 @@ literal) avoids ever introducing the binary approximation error in the
 first place. The general rule: \`float\` and \`double\` are fundamentally
 unsuitable for representing money or any value requiring exact decimal
 arithmetic - use \`BigDecimal\` (or a fixed-point integer representation,
-like storing cents as a `long`) for anything financial, full stop.`,
+like storing cents as a \`long\`) for anything financial, full stop.`,
 };

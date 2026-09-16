@@ -82,7 +82,6 @@ the very first request is special.`,
     },
     {
       id: "readiness-probe-race-condition",
-      request_never_mind: undefined,
       label: "The readiness probe is racing ahead of the application actually being fully warmed up.",
       explanation:
         "Readiness accurately reflects what it's designed to check: that the web server is listening and able to accept connections - it was never meant to guarantee every lazily-initialized bean has already paid its startup cost, which is a distinct, application-level concern that `@Lazy` explicitly creates here.",

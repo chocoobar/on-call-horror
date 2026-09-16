@@ -11,7 +11,7 @@ export const theArrayThatRejectedItsOwnType: Scenario = {
   tags: ["java25", "arrays", "generics"],
   briefing: `"order-export" builds a small array of line items for a legacy XML export
 format used by one warehouse partner. It's worked for years, until a new
-`GiftCardLineItem` subtype was introduced last sprint - orders containing
+\`GiftCardLineItem\` subtype was introduced last sprint - orders containing
 a gift card now throw a runtime exception during export, while every
 other line item type exports fine.`,
   constraints: [

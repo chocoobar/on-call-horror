@@ -9,7 +9,7 @@ export const theKeyThatChangedItsMind: Scenario = {
   topic: "java-bugs",
   timeMinutes: 14,
   tags: ["java25", "hashmap", "mutable-keys"],
-  briefing: `"session-cache" keeps an in-memory `HashMap` keyed by a `CartKey` object
+  briefing: `"session-cache" keeps an in-memory \`HashMap\` keyed by a \`CartKey\` object
 built from a customer's session and current cart total, used to quickly
 look up cached pricing calculations. Once a customer adds an item and
 their cart total changes, the previously cached entry for that same
@@ -109,7 +109,7 @@ permanently orphaned, unreachable and leaking memory for the rest of the
 map's lifetime.
 
 The fix is never mutating an object already in use as a map key - build
-a new key (or make `CartKey` immutable) instead of updating one in
+a new key (or make \`CartKey\` immutable) instead of updating one in
 place:
 
 \`\`\`java
@@ -130,8 +130,8 @@ cache.remove(oldKey);
 cache.put(new CartKey(session, newTotal), cachedValue);
 \`\`\`
 
-The general rule: any object used as a `HashMap`/`HashSet` key must be
-effectively immutable, at minimum in every field `equals()`/`hashCode()`
+The general rule: any object used as a \`HashMap\`/\`HashSet\` key must be
+effectively immutable, at minimum in every field \`equals()\`/\`hashCode()\`
 depend on - mutating a key after insertion breaks the map's internal
 bucket invariant and produces entries that are still present but
 permanently unfindable.`,

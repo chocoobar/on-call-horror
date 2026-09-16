@@ -99,12 +99,12 @@ internal buckets, none of which the class promises to keep stable across
 versions, or even necessarily across separate runs with different
 insertion histories. The only change alongside this incident was a
 routine JDK patch bump to the base image - exactly the kind of change
-that can alter `HashMap`'s internal hashing or bucket-sizing behavior
+that can alter \`HashMap\`'s internal hashing or bucket-sizing behavior
 without touching a single line of application code, because nothing
 about that internal behavior was ever a promise to begin with.
 
 The fix is using a map type that actually guarantees the ordering the
-export needs, rather than depending on `HashMap`'s incidental behavior:
+export needs, rather than depending on \`HashMap\`'s incidental behavior:
 
 \`\`\`java
 public List<String> columnOrder(Map<String, String> fields) {

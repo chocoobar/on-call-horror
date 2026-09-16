@@ -121,7 +121,7 @@ public class EmailBuilder {
 The general rule: mutable state stored as an instance field on a
 singleton-scoped service is shared by every concurrent caller - anything
 that's meant to be scoped to a single request or single call (like a
-`StringBuilder` building one message) belongs in a local variable, never
+\`StringBuilder\` building one message) belongs in a local variable, never
 a field, unless it's explicitly designed and synchronized for concurrent
 access.`,
 };

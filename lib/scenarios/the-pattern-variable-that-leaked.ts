@@ -10,7 +10,7 @@ export const thePatternVariableThatLeaked: Scenario = {
   timeMinutes: 14,
   tags: ["java25", "pattern-matching", "instanceof"],
   briefing: `"refund-calculator" was recently rewritten to use pattern-matching
-`instanceof`, cleaning up a lot of old casting boilerplate. Since that
+\`instanceof\`, cleaning up a lot of old casting boilerplate. Since that
 rewrite, refunds for orders originally paid with store credit throw a
 NullPointerException, while card and cash-paid orders refund correctly.`,
   constraints: [

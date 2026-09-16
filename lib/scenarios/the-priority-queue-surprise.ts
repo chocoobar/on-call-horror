@@ -11,7 +11,7 @@ export const thePriorityQueueSurprise: Scenario = {
   tags: ["java25", "priorityqueue", "ordering"],
   briefing: `The on-call digest email is supposed to list the five most urgent open
 tickets, in priority order, drawn directly from the team's live
-`PriorityQueue`. Several engineers have noticed the listed tickets are
+\`PriorityQueue\`. Several engineers have noticed the listed tickets are
 sometimes clearly not the five most urgent ones actually in the queue -
 a genuinely lower-priority ticket sneaks into the list.`,
   constraints: [
@@ -122,5 +122,5 @@ The general rule: \`PriorityQueue\`'s iteration order is unspecified and
 must never be relied on for anything priority-sensitive - only
 \`poll()\`/\`peek()\` are documented to honor the queue's ordering; reach for
 a genuinely sorted structure (like sorting a snapshot list, or a
-`TreeSet`) if repeated iteration in priority order is actually needed.`,
+\`TreeSet\`) if repeated iteration in priority order is actually needed.`,
 };

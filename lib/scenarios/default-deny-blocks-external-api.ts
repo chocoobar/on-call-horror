@@ -102,7 +102,7 @@ matching allow rule anywhere in the policy, so the default-deny baseline
 drops it - producing exactly the connect timeout observed, isolated to
 this one external dependency while every internal call keeps working.
 
-The fix is adding an explicit `ipBlock` egress rule scoped to the
+The fix is adding an explicit \`ipBlock\` egress rule scoped to the
 provider's address range:
 
 \`\`\`yaml
